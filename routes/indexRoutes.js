@@ -67,4 +67,20 @@ router.get('/cart', function(req, res) {
   res.send(inCartCams);
 })
 
+router.patch('/cart/:id/add', function(req, res) {
+  cams = cams.map(cam => {
+    if(cam.id == req.params.id) cam.inCart = true;
+    return cam;
+  })
+  res.json(cams);
+})
+
+router.patch('/cart/:id/remove', function(req, res) {
+  cams = cams.map(cam => {
+    if(cam.id == req.params.id) cam.inCart = false;
+    return cam;
+  })
+  res.json(cams);
+})
+
 module.exports = router;
