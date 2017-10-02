@@ -9,21 +9,24 @@ var cams = [
     image: 'http://ecx.images-amazon.com/images/I/713u2gDQqML._SX522_.jpg',
     rating: 4,
     price: 369.99,
-    onSale: true
+    onSale: true,
+    inCart: false
   }, {
     id: 2,
     title: 'Canon EOS 70D',
     image: 'http://ecx.images-amazon.com/images/I/81U00AkAUWL._SX522_.jpg',
     rating: 2,
     price: 1099.0,
-    onSale: false
+    onSale: false,
+    inCart: true
   }, {
     id: 3,
     title: 'Nikon D810A',
     image: 'http://ecx.images-amazon.com/images/I/91wtXIfLl2L._SX522_.jpg',
     rating: 3,
     price: 3796.95,
-    onSale: true
+    onSale: true,
+    inCart: false
   }
 ]
 
@@ -57,6 +60,11 @@ router.delete('/cameras/:id', function(req, res) {
   let newList = cams.filter(cam => cam.id != req.params.id);
   cams = newList;
   res.send(cams);
+})
+
+router.get('/cart', function(req, res) {
+  let inCartCams = cams.filter(cam => cam.inCart)
+  res.send(inCartCams);
 })
 
 module.exports = router;
